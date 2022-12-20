@@ -1,3 +1,4 @@
+# (Some bugs in hosted site because github pages doesn't perfectly support routers)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
