@@ -1,14 +1,14 @@
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, {useState} from 'react'
 import Alert from './components/Alert';
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -62,24 +62,30 @@ function App() {
     <>
       {/* <Navbar title="TextUtils" aboutText = "About Us"/> */}
       {/* <Navbar/> */}
-      {/* <Router> */}
+      <Router>
       <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} toggleRedMode={toggleRedMode}/>
       <Alert alert={alert}/>
       <div className="container my-3">
-        {/* <Routes> */}
+        <Routes>
           {/* using just path="" will match the subroutes firstly and we will not be able
           to access our accuracte route. eg:
           /Home will match /Home/About firstly, so we will get this instead of /Home/About
           /Home/About */}
-          {/* <Route exact path='/about' element={
+          <Route exact path='/about' element={
             <About/>
-          } /> */}
-          {/* <Route exact path='/' element={ */}
+          } />
+          {/* <Route path="/about">
+            <About/>
+          </Route> */}
+          <Route exact path='/' element={
           <TextForm showAlert={showAlert} heading="Enter the text to analyze" mode={mode}/>
-          {/* } /> */}
-        {/* </Routes> */}
+          } />
+          {/* <Route path="/">
+          <TextForm showAlert={showAlert} heading="Enter the text to analyze" mode={mode}/>
+          </Route> */}
+        </Routes>
       </div>
-      {/* </Router> */}
+      </Router>
     </>
   );
 }
