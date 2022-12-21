@@ -3,7 +3,11 @@ a text analyzing website which can analyze your text quickly and efficiently. It
 #### This app was created using ReactJS.
 
 #### View the app in action:
-<p>Site hosted on:</p> 
+<p>Site hosted on: </p> 
+
+[https://abhayraihal.github.io/textUtils-React/](https://abhayraihal.github.io/textUtils-React/)
+
+After heading over to above link, click on Home/About to head over to the site. Apparently, there are some bugs in the deployment of site 😅
 
 Run locally:
 <p>In the project directory, firstly install all the dependencies</p>
