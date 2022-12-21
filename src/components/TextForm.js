@@ -38,15 +38,6 @@ export default function TextForm(props) {
         // console.log("onChange was clicked");
         setReplaceText(event.target.value);
     }
-    function getLength(text){
-        if (text.length===0) return 0;
-        let newText = text;
-        newText = newText.trim();
-        let regexPattern = /\s+/g;
-        newText = newText.replace(regexPattern, " ");
-        let length = newText.split(" ").length;
-        return length;
-    }
 
     const [text, setText] = useState("");
     // text = "new text"  // wrong way to change the state 
@@ -69,28 +60,29 @@ export default function TextForm(props) {
     <div className="container" style={{color: props.mode==="dark"?"white":"black"}}>
         <h1>{props.heading}</h1>
         <div className="mb-3">
-            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"grey":"white", color: props.mode==="dark"?"white":"black"}} value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"#13466e":"white", color: props.mode==="dark"?"white":"black"}} value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>Uppercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleLowClick}>Lowercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleClearClick}>Clear</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleUpClick}>Uppercase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Lowercase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>Clear</button>
     </div>
     <div className="container my-4" style={{color: props.mode==="dark"?"white":"black"}}>
         <h2>Your text summary</h2>
-        <p>{getLength(text)} words and {text.length} characters</p>
-        <p>It would take {0.08 * getLength(text)} minutes to read this.</p>
+        {/* split with 1 or more spaces, including newline /n, etc */}
+        <p>{text.split(/\s/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+        <p>It would take {0.08 * text.split(/\s/).filter((element)=>{return element.length!==0}).length} minutes to read this.</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter your text to preview it here"}</p>
     </div>
     <div className="container my-4" style={{color: props.mode==="dark"?"white":"black"}}>
         <h2>Find and replace</h2>
         <div className="mb-3" style={frStyle}>
-            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"grey":"white", color: props.mode==="dark"?"white":"black"}} value={findText} onChange={handleOnFind} id="myBox" rows="4"></textarea>
+            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"#13466e":"white", color: props.mode==="dark"?"white":"black"}} value={findText} onChange={handleOnFind} id="myBox" rows="2"></textarea>
         </div>
         <div className="mb-3" style={frStyle}>
-            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"grey":"white", color: props.mode==="dark"?"white":"black"}} value={replaceText} onChange={handleOnReplace} id="myBox" rows="4"></textarea>
+            <textarea className="form-control" style={{backgroundColor: props.mode==="dark"?"#13466e":"white", color: props.mode==="dark"?"white":"black"}} value={replaceText} onChange={handleOnReplace} id="myBox" rows="2"></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleFindReplace}>Replace</button>
+        <button disabled={text.length===0 || findText.length===0 || replaceText.length===0} className="btn btn-primary mx-2 my-2" onClick={handleFindReplace}>Replace</button>
     </div>
     </>
   )

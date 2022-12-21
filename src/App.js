@@ -24,38 +24,32 @@ function App() {
     }, 1000);
   }
 
+  // const removeBodyClasses = () => {
+  //   document.body.classList.remove('bg-light');
+  //   document.body.classList.remove('bg-dark');
+  //   document.body.classList.remove('bg-danger');
+  //   document.body.classList.remove('bg-success');
+  //   document.body.classList.remove('bg-warning');
+  //   document.body.classList.remove('bg-info');
+  //   document.body.classList.remove('bg-primary');
+  // }
+
   const toggleMode = () => {
+    // pass cls above 
+    // remove all body classes and add new one
+    // removeBodyClasses();
+    // document.body.classList.add('bg-'+cls)
+    // in navbar, we pass null for dark/light mode, while we pass the required color for the active class
     if (mode==="light"){
       setMode("dark");
       document.body.style.backgroundColor = '#042743';
       showAlert("Dark mode has been enabled", "success")
-      document.title = "TextUtils - Dark Mode";
+      // document.title = "TextUtils - Dark Mode";
     }else{
       setMode("light");
       document.body.style.backgroundColor = 'white';
       showAlert("Light mode has been enabled", "success")
-      document.title = "TextUtils - Light Mode";
-    }
-  }
-
-  const toggleRedMode = () => {
-    if (mode==="light"){
-      setMode("red");
-      document.body.style.backgroundColor = 'red';
-      showAlert("Red mode has been enabled", "success")
-      document.title = "TextUtils - Red Mode";
-      // to make alternating title of site
-      // setInterval(() => {
-      //   document.title = "TextUtils is Amazing";
-      // }, 2000);
-      // setInterval(() => {
-      //   document.title = "Install TextUtils Now";
-      // }, 1500);
-    }else{
-      setMode("light");
-      document.body.style.backgroundColor = 'white';
-      showAlert("Light mode has been enabled", "success")
-      document.title = "TextUtils - Light Mode";
+      // document.title = "TextUtils - Light Mode";
     }
   }
   return (
@@ -63,7 +57,7 @@ function App() {
       {/* <Navbar title="TextUtils" aboutText = "About Us"/> */}
       {/* <Navbar/> */}
       <Router>
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} toggleRedMode={toggleRedMode}/>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
       <Alert alert={alert}/>
       <div className="container my-3">
         <Routes>
@@ -72,7 +66,7 @@ function App() {
           /Home will match /Home/About firstly, so we will get this instead of /Home/About
           /Home/About */}
           <Route exact path='/about' element={
-            <About/>
+            <About mode={mode}/>
           } />
           {/* <Route path="/about">
             <About/>
